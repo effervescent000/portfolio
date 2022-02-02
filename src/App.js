@@ -16,6 +16,24 @@ import "./styles/main.scss";
 function App() {
     const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
 
+    useEffect(() => {
+        checkLoginStatus();
+    }, []);
+
+    const checkLoginStatus = () => {
+        axios
+            .get(`https://api.devcamp.space/logged_in`, { withCredentials: true })
+            .then((response) => {
+                const loggedIn = response.data.logged_in;
+                if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+                    setLoggedInStatus("LOGGED_IN");
+                } else if (!loggedIn && loggedInStatus === "LOGGED_IN") {
+                    setLoggedInStatus("NOT_LOGGED_IN");
+                }
+            })
+            .catch((error) => console.log(error.response));
+    };
+
     const handleLogin = () => {
         setLoggedInStatus("LOGGED_IN");
     };
