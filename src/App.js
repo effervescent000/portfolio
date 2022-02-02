@@ -6,6 +6,7 @@ import NavigationComponent from "./components/navigation-component";
 import HomePage from "./components/home-page/home-page";
 import AuthPage from "./components/auth/auth-page";
 import AboutPage from "./components/about/about-page";
+import PortfolioDetail from "./components/portfolio/portfolio-detail";
 
 // import logo from './logo.svg';
 // import './App.css';
@@ -46,7 +47,7 @@ function App() {
                             <Route path="/portfolio-manager">{/* portfolio manager here */}</Route>
                         ) : null}
                         <Route path="/portfolio/:permalink">
-                            {/* portfolio detail goes here */}
+                            <PortfolioDetail />
                         </Route>
                         <Route>{/* no match component here */}</Route>
                     </Switch>
