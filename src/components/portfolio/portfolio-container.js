@@ -5,7 +5,7 @@ import PortfolioItem from "./portfolio-item";
 
 const PortfolioContainer = (props) => {
     const [pageTitle, setPageTitle] = useState("Welcome to my portfolio!");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -18,6 +18,7 @@ const PortfolioContainer = (props) => {
             .then((response) => {
                 console.log(response);
                 setData(response.data.portfolio_items);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -30,10 +31,18 @@ const PortfolioContainer = (props) => {
         });
     };
 
+    const getContent = () => {
+        if (isLoading) {
+            return <div>Loading...</div>;
+        } else {
+            return <div className="portfolio-items-wrapper">{populatePortfolioItems()}</div>;
+        }
+    };
+
     return (
         <div>
             <h2>{pageTitle}</h2>
-            <div className="portfolio-items-wrapper">{populatePortfolioItems()}</div>
+            {getContent()}
         </div>
     );
 };
