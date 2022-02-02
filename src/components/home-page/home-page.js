@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
+import PortfolioContainer from "../portfolio/portfolio-container";
+
 const HomePage = (props) => {
     return (
         <div>
-            {/* nothing here */}
-            {/* nothing here */}
+            <PortfolioContainer />
         </div>
     );
 };
