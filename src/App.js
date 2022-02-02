@@ -4,6 +4,8 @@ import axios from "axios";
 
 import NavigationComponent from "./components/navigation-component";
 import HomePage from "./components/home-page/home-page";
+import AuthPage from "./components/auth/auth-page";
+import AboutPage from "./components/about/about-page";
 
 // import logo from './logo.svg';
 // import './App.css';
@@ -33,6 +35,20 @@ function App() {
                         <Route exact path="/">
                             <HomePage />
                         </Route>
+                        <Route path="/auth">
+                            <AuthPage handleLogin={handleLogin} />
+                        </Route>
+                        <Route path="/about">
+                            <AboutPage />
+                        </Route>
+                        <Route path="/contact">{/* contact page goes here */}</Route>
+                        {loggedInStatus === "LOGGED_IN" ? (
+                            <Route path="/portfolio-manager">{/* portfolio manager here */}</Route>
+                        ) : null}
+                        <Route path="/portfolio/:permalink">
+                            {/* portfolio detail goes here */}
+                        </Route>
+                        <Route>{/* no match component here */}</Route>
                     </Switch>
                 </div>
             </Router>
