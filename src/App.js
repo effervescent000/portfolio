@@ -12,6 +12,7 @@ import PortfolioDetail from "./components/portfolio/portfolio-detail";
 // import './App.css';
 import "bootstrap/scss/bootstrap.scss";
 import "./styles/main.scss";
+import PortfolioManagerPage from "./components/portfolio/portfolio-manager/portfolio-manager-page";
 
 function App() {
     const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
@@ -62,7 +63,9 @@ function App() {
                         </Route>
                         <Route path="/contact">{/* contact page goes here */}</Route>
                         {loggedInStatus === "LOGGED_IN" ? (
-                            <Route path="/portfolio-manager">{/* portfolio manager here */}</Route>
+                            <Route path="/portfolio-manager">
+                                <PortfolioManagerPage />
+                            </Route>
                         ) : null}
                         <Route path="/portfolio/:permalink">
                             <PortfolioDetail />
