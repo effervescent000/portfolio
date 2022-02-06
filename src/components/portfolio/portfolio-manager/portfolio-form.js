@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Formik, Form } from "formik";
 
 import TextInput from "../../form-components/text-input";
@@ -12,6 +13,18 @@ const PortfolioForm = (props) => {
     useEffect(() => {
         setEditMode(Object.keys(itemToEdit).length > 0 ? true : false);
     }, [itemToEdit]);
+
+    const deleteImage = (imageType) => {
+        axios
+            .delete(
+                `https://tararichardson.devcamp.space/portfolio/delete-portfolio-image/${itemToEdit.id}?image_type=${imageType}`,
+                { withCredentials: true }
+            )
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => console.log(error.response));
+    };
 
     return (
         <Formik
@@ -46,9 +59,34 @@ const PortfolioForm = (props) => {
                     <textarea name="description" placeholder="Description" />
                 </div>
                 <div className="three-columns">
-                    <ImageDropzone field="thumb_image" />
-                    <ImageDropzone field="banner_image" />
-                    <ImageDropzone field="logo_image" />
+                    {editMode && itemToEdit.thumb_image_url ? (
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={itemToEdit.thumb_image_url} alt="Thumbnail" />
+                            <button type="button">Remove file</button>
+                        </div>
+                    ) : (
+                        <ImageDropzone field="thumb_image" />
+                    )}
+                    {editMode && itemToEdit.banner_image_url ? (
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={itemToEdit.banner_image_url} alt="Banner" />
+                            <button type="button" onClick={() => deleteImage("banner_image")}>
+                                Remove file
+                            </button>
+                        </div>
+                    ) : (
+                        <ImageDropzone field="banner_image" />
+                    )}
+                    {editMode && itemToEdit.logo_url ? (
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={itemToEdit.logo_url} alt="Logo" />
+                            <button type="button" onClick={() => deleteImage("logo")}>
+                                Remove file
+                            </button>
+                        </div>
+                    ) : (
+                        <ImageDropzone field="logo" />
+                    )}
                 </div>
                 <button type="submit">Save</button>
             </Form>
