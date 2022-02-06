@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import PortfolioSidebar from "./portfolio-sidebar";
+import PortfolioForm from "./portfolio-form";
 
 const PortfolioManagerPage = (props) => {
     const [portfolioItems, setPortfolioItems] = useState([]);
@@ -41,7 +42,9 @@ const PortfolioManagerPage = (props) => {
 
     return (
         <div className="portfolio-manager-wrapper">
-            <div className="left-column"></div>
+            <div className="left-column">
+                <PortfolioForm itemToEdit={itemToEdit} setItemToEdit={setItemToEdit} />
+            </div>
             <div className="right-column">
                 <PortfolioSidebar
                     data={portfolioItems}
