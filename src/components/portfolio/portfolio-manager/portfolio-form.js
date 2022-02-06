@@ -5,6 +5,7 @@ import { Formik, Form } from "formik";
 import TextInput from "../../form-components/text-input";
 import SelectField from "../../form-components/select-input";
 import ImageDropzone from "../../form-components/dropzone-input";
+import TextAreaField from "../../form-components/text-area-field";
 
 const PortfolioForm = (props) => {
     const itemToEdit = props.itemToEdit;
@@ -26,6 +27,54 @@ const PortfolioForm = (props) => {
             .catch((error) => console.log(error.response));
     };
 
+    const buildForm = (values) => {
+        let formData = new FormData();
+
+        formData.append("portfolio_item[name]", values.name);
+        formData.append("portfolio_item[desccription]", values.description);
+        formData.append("portfolio_item[url]", values.url);
+        formData.append("portfolio_item[category]", values.category);
+        if (values.thumb_image) {
+            formData.append("portfolio_item[thumb_image]", values.thumb_image);
+        }
+        if (values.banner_image) {
+            formData.append("portfolio_item[banner_image]", values.banner_image);
+        }
+        if (values.logo_image) {
+            formData.append("portfolio_item[logo_image]", values.logo);
+        }
+
+        return formData;
+    };
+
+    const handleSubmit = (values) => {
+        if (editMode) {
+            axios
+                .put(
+                    `https://tararichardson.devcamp.space/portfolio/portfolio_items`,
+                    buildForm(values),
+                    { withCredentials: true }
+                )
+                .then((response) => {
+                    console.log("response from PUT endpoint", response);
+                    // setEditMode(false);
+                    props.setItemToEdit({});
+                })
+                .catch((error) => console.log("Error from PUT endpoint", error.response));
+        } else {
+            axios
+                .post(
+                    `https://tararichardson.devcamp.space/portfolio/portfolio_items`,
+                    buildForm(values),
+                    { withCredentials: true }
+                )
+                .then((response) => {
+                    console.log("response from POST endpoint", response);
+                })
+                .catch((error) => console.log("Error from POST endpoint", error.response));
+        }
+    };
+
     return (
         <Formik
             initialValues={{
@@ -39,7 +88,7 @@ const PortfolioForm = (props) => {
                 logo: itemToEdit.logo || "",
             }}
             enableReinitialize={true}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => handleSubmit(values)}
         >
             <Form className="portfolio-form-wrapper">
                 <div className="two-columns">
@@ -56,7 +105,7 @@ const PortfolioForm = (props) => {
                     </SelectField>
                 </div>
                 <div className="one-column">
-                    <textarea name="description" placeholder="Description" />
+                    <TextAreaField label="" name="description" placeholder="Description" />
                 </div>
                 <div className="three-columns">
                     {editMode && itemToEdit.thumb_image_url ? (

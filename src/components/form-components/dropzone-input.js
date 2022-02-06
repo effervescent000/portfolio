@@ -7,7 +7,7 @@ const ImageDropzone = (props) => {
 
     const formikProps = useFormikContext();
     const onDrop = useCallback((acceptedFiles) => {
-        formikProps.setFieldValue(props.field, acceptedFiles);
+        formikProps.setFieldValue(props.field, acceptedFiles[0]);
         setFiles(
             acceptedFiles.map((file) => Object.assign(file, { preview: URL.createObjectURL(file) }))
         );

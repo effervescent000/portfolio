@@ -43,7 +43,7 @@ const PortfolioManagerPage = (props) => {
     return (
         <div className="portfolio-manager-wrapper">
             <div className="left-column">
-                <PortfolioForm itemToEdit={itemToEdit} />
+                <PortfolioForm itemToEdit={itemToEdit} setItemToEdit={setItemToEdit} />
             </div>
             <div className="right-column">
                 <PortfolioSidebar
