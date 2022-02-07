@@ -1,0 +1,30 @@
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .left-side {
+        .navbar {
+            .container-fluid {
+                display: flex;
+                justify-content: flex-start;
+                gap: 2em;
+                .navbar-brand {
+                    @include link-styling();
+                }
+                .nav {
+                    .nav-item {
+                        .nav-link {
+                            @include link-styling();
+                            padding: 0.2rem 0.3rem;
+                            margin: 0.3rem 0.7rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right-side {
+        height: 100%;
+        align-self: center;
+        margin: 0 2em;
+    }
+}
