@@ -31,7 +31,7 @@ const PortfolioForm = (props) => {
         let formData = new FormData();
 
         formData.append("portfolio_item[name]", values.name);
-        formData.append("portfolio_item[desccription]", values.description);
+        formData.append("portfolio_item[description]", values.description);
         formData.append("portfolio_item[url]", values.url);
         formData.append("portfolio_item[category]", values.category);
         if (values.thumb_image) {
@@ -50,13 +50,13 @@ const PortfolioForm = (props) => {
     const handleSubmit = (values) => {
         if (editMode) {
             axios
-                .put(
-                    `https://tararichardson.devcamp.space/portfolio/portfolio_items`,
+                .patch(
+                    `https://tararichardson.devcamp.space/portfolio/portfolio_items/${props.itemToEdit.id}`,
                     buildForm(values),
                     { withCredentials: true }
                 )
                 .then((response) => {
-                    console.log("response from PUT endpoint", response);
+                    console.log("response from PATCH endpoint", response);
                     // setEditMode(false);
                     props.setItemToEdit({});
                 })
