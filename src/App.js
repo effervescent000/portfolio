@@ -46,7 +46,7 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <div>
+                <div className="page-wrapper">
                     <NavigationComponent
                         loggedInStatus={loggedInStatus}
                         handleLogout={handleLogout}

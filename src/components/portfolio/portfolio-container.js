@@ -4,7 +4,6 @@ import axios from "axios";
 import PortfolioItem from "./portfolio-item";
 
 const PortfolioContainer = (props) => {
-    const [pageTitle, setPageTitle] = useState("Welcome to my portfolio!");
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
 
@@ -39,12 +38,7 @@ const PortfolioContainer = (props) => {
         }
     };
 
-    return (
-        <div>
-            <h2>{pageTitle}</h2>
-            {getContent()}
-        </div>
-    );
+    return <div>{getContent()}</div>;
 };
 
 export default PortfolioContainer;
