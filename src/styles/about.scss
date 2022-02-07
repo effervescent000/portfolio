@@ -1,0 +1,21 @@
+.about-wrapper {
+    display: flex;
+    justify-content: center;
+    .content-wrapper {
+        width: 45%;
+        p {
+            margin-bottom: 2em;
+            img {
+                border-radius: 5px;
+                height: 200px;
+                float: left;
+                margin: 1em;
+            }
+        }
+        p:nth-child(2) {
+            img {
+                float: right;
+            }
+        }
+    }
+}
