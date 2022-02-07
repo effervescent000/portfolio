@@ -33,7 +33,7 @@ const PortfolioDetail = (props) => {
     return (
         <div className="portfolio-detail-wrapper">
             <div className="banner" style={bannerStyles}>
-                <img src={logo_url} alt="logo" />
+                {/* <img src={logo_url} alt="logo" /> */}
             </div>
             <div className="portfolio-detail-description-wrapper">
                 <div className="description">{description}</div>
