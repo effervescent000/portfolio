@@ -13,9 +13,10 @@ const PortfolioContainer = (props) => {
 
     const getPortfolioItems = () => {
         axios
-            .get("https://tararichardson.devcamp.space/portfolio/portfolio_items")
+            .get(
+                "https://tararichardson.devcamp.space/portfolio/portfolio_items"
+            )
             .then((response) => {
-                console.log(response);
                 setData(response.data.portfolio_items);
                 setIsLoading(false);
             })
@@ -34,7 +35,11 @@ const PortfolioContainer = (props) => {
         if (isLoading) {
             return <div>Loading...</div>;
         } else {
-            return <div className="portfolio-items-wrapper">{populatePortfolioItems()}</div>;
+            return (
+                <div className="portfolio-items-wrapper">
+                    {populatePortfolioItems()}
+                </div>
+            );
         }
     };
 
