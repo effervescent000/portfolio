@@ -2,13 +2,17 @@ import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 
 const NavigationComponent = (props) => {
     const history = useHistory();
 
     const handleSignout = () => {
         axios
-            .delete("https://api.devcamp.space/logout", { withCredentials: true })
+            .delete("https://api.devcamp.space/logout", {
+                withCredentials: true,
+            })
             .then((response) => {
                 if (response.status === 200) {
                     history.push("/");
@@ -31,11 +35,16 @@ const NavigationComponent = (props) => {
                             <NavLink href="/about">About Me</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/contact">Contact</NavLink>
+                            <NavLink href="https://www.linkedin.com/in/tara-richardson-721294224/">
+                                Contact{" "}
+                                <FontAwesomeIcon icon={faExternalLinkAlt} />
+                            </NavLink>
                         </NavItem>
                         {props.loggedInStatus === "LOGGED_IN" ? (
                             <NavItem>
-                                <NavLink href="/portfolio-manager">Portfolio Manager</NavLink>
+                                <NavLink href="/portfolio-manager">
+                                    Portfolio Manager
+                                </NavLink>
                             </NavItem>
                         ) : null}
                     </Nav>
